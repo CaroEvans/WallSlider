@@ -4,19 +4,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private Transform _player;
+    private AnimationCurveChunk _chunk;
     [SerializeField]
-    private GameObject _prefab;
-    [SerializeField]
-    private float _frequency = 1.0f;
+    private ObjectFactory _factory;
 
-    IEnumerator Start()
+    void Start()
     {
-        var delay = new WaitForSeconds(_frequency);
-        while(true)
-        {
-            yield return delay;
-            Instantiate(_prefab, _player.position + Vector3.down * 5f + Vector3.left * 3f, transform.rotation);
-        }
+        StartCoroutine(_chunk.Load(new RectInt(-6, -10, 12, 10), _factory));
     }
 }
