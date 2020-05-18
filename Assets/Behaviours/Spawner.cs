@@ -1,5 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using Chutes;
+using System.Linq;
+using ExtensionMethods;
 
 public class Spawner : MonoBehaviour
 {
@@ -11,5 +13,9 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(_chunk.Load(new RectInt(-6, -10, 12, 10), _factory));
+
+        var chute = new EvenChute(5);
+        var origin = new RectInt(Vector2Int.zero, Vector2Int.right * 12);
+        chute.From(origin).Where(rect => (rect.yMax % 10) == 0).Take(5).Select(RectIntExtensions.Draw).ToArray();
     }
 }
