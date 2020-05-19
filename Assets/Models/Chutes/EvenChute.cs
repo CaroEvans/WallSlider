@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Chutes
 {
     /// <summary>
-    /// An EvenChute is the division of space into a stack of evenly sized rectangles.
+    /// An EvenChute is a Chute made up of evenly sized segments.
     /// </summary>
     public class EvenChute : Chute
     {
