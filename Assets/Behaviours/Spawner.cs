@@ -3,6 +3,7 @@ using Chutes;
 using System.Linq;
 using ExtensionMethods;
 using Obstacles;
+using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Spawner : MonoBehaviour
     private float _spawnThreshold;
     [SerializeField]
     private ObjectFactory _factory;
+    [SerializeField]
+    private Hashtable _hashTable;
 
     void Start()
     {
@@ -19,7 +22,6 @@ public class Spawner : MonoBehaviour
         var obstacle = new ObjectStringObstacle(_path, _spawnThreshold, _factory);
         var origin = new RectInt(Vector2Int.zero, Vector2Int.right * 12);
         chute.From(origin)
-             .Where(rect => (rect.yMax % 10) == 0)
              .Take(5)
              .Select(obstacle.Fill)
              .Select(RectIntExtensions.Draw)
