@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Chutes;
 using System.Linq;
-using ExtensionMethods;
 using Obstacles;
 using System.Collections;
 
@@ -15,16 +14,17 @@ public class Spawner : MonoBehaviour
     private ObjectFactory _factory;
     [SerializeField]
     private Hashtable _hashTable;
+    [SerializeField]
+    private Transform _player;
 
-    void Start()
+    IEnumerator Start()
     {
-        Chute chute = new EvenChute(5);
+        Chute chute = new EvenChute(10);
         var obstacle = new ObjectStringObstacle(_path, _spawnThreshold, _factory);
         var origin = new RectInt(Vector2Int.zero, Vector2Int.right * 12);
-        chute.From(origin)
-             .Take(5)
-             .Select(obstacle.Fill)
-             .Select(RectIntExtensions.Draw)
-             .ToArray();
+        foreach (var rect in chute.From(origin).Select(obstacle.Fill).Skip(3))
+        {
+            yield return new WaitUntil(() => _player.position.y < rect.yMax);
+        }
     }
 }
