@@ -6,9 +6,14 @@ public abstract class State : MonoBehaviour
     [SerializeField]
     private StateMachine _stateMachine;
 
-    protected virtual void Enter(StateMachine stateMachine) { }
-    protected virtual void Exit(StateMachine stateMachine) { }
-    protected virtual void Run(StateMachine stateMachine) { }
+    protected virtual void Enter() { }
+
+    protected virtual void Exit() { }
+
+    protected virtual void ChangeState(string action)
+    {
+        _stateMachine.Change(action);
+    }
 
     public void Reset()
     {
@@ -17,16 +22,11 @@ public abstract class State : MonoBehaviour
 
     public void OnEnable()
     {
-        Enter(_stateMachine);
-    }
-
-    public void Update()
-    {
-        Run(_stateMachine);
+        Enter();
     }
 
     public void OnDisable()
     {
-        Exit(_stateMachine);
+        Exit();
     }
 }

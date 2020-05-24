@@ -2,19 +2,19 @@
 
 public class GoState : State
 {
-    protected override void Enter(StateMachine stateMachine)
+    protected override void Enter()
     {
         Debug.Log("Start Green");
     }
 
-    protected override void Run(StateMachine stateMachine)
+    public void Update()
     {
         Debug.Log("Update Green");
         if (Input.GetKeyUp(KeyCode.Space))
-            stateMachine.Change("Toggle");
+            ChangeState("Toggle");
     }
 
-    protected override void Exit(StateMachine stateMachine)
+    protected override void Exit()
     {
         Debug.Log("Exit Green");
     }
