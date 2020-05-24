@@ -4,17 +4,19 @@ public class CameraFocus : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody _target;
-    [SerializeField]
-    private float _moveSpeed, _limit;
+    [SerializeField, Range(0, 20.0f)]
+    private float _moveSpeed, _limit, _velocityScale, _velocityAcceleration;
     [SerializeField]
     private AnimationCurve _accelationCurve;
 
+    private float _velocity = 0;
+
     void Update()
     {
-        Vector2 targetVelocity = _target.velocity;
-        targetVelocity.y = Mathf.Clamp(targetVelocity.y, -_limit, _limit);
-        float time = Mathf.InverseLerp(0, targetVelocity.y, transform.localPosition.y);
-        Vector3 targetPos = Vector2.MoveTowards(transform.localPosition, targetVelocity, Time.deltaTime * _moveSpeed * _accelationCurve.Evaluate(time));
+        float accel = _accelationCurve.Evaluate(Mathf.Abs(_velocity));
+        _velocity = Mathf.MoveTowards(_velocity, _target.velocity.y, Time.deltaTime * _velocityAcceleration * Mathf.Max(accel, 0));
+        float clampedVelocity = Mathf.Clamp(_velocity, -_limit, _limit) * _velocityScale;
+        Vector3 targetPos = Vector2.MoveTowards(transform.localPosition, Vector2.up * clampedVelocity, Time.deltaTime * _moveSpeed);
         targetPos.z = transform.localPosition.z;
         transform.localPosition = targetPos;
     }

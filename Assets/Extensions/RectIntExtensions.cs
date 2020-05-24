@@ -37,7 +37,7 @@ namespace ExtensionMethods
         /// <returns>An enumerable containing each y position within the rectangle in descending order.</returns>
         public static IEnumerable<int> FromTopToBottom (this RectInt rect)
         {
-            for (int y = rect.yMax; y >= rect.yMin; y--)
+            for (int y = rect.yMax; y > rect.yMin; y--)
                 yield return y;
         }
     }

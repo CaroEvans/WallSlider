@@ -23,7 +23,9 @@ namespace Obstacles
         public override RectInt Fill(RectInt area)
         {
             foreach (var y in area.FromTopToBottom())
+            {
                 CreateObject(area, y);
+            }
             return area;
         }
 
