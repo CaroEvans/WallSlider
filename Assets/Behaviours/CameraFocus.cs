@@ -8,6 +8,8 @@ public class CameraFocus : MonoBehaviour
     private float _moveSpeed, _limit, _velocityScale, _velocityAcceleration;
     [SerializeField]
     private AnimationCurve _accelationCurve;
+    [SerializeField]
+    private float _anchorX = 4;
 
     private float _velocity = 0;
 
@@ -17,6 +19,7 @@ public class CameraFocus : MonoBehaviour
         _velocity = Mathf.MoveTowards(_velocity, _target.velocity.y, Time.deltaTime * _velocityAcceleration * Mathf.Max(accel, 0));
         float clampedVelocity = Mathf.Clamp(_velocity, -_limit, _limit) * _velocityScale;
         Vector3 targetPos = Vector2.MoveTowards(transform.localPosition, Vector2.up * clampedVelocity, Time.deltaTime * _moveSpeed);
+        targetPos.x = _anchorX - _target.transform.position.x;
         targetPos.z = transform.localPosition.z;
         transform.localPosition = targetPos;
     }
