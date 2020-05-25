@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 1701074294}
   - component: {fileID: 1701074297}
   - component: {fileID: 1701074296}
+  - component: {fileID: 1701074295}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -825,6 +826,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &1701074295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701074289}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8e84744c5b1a148a38a7d7646157f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 1701074297}
+  _rigidbody: {fileID: 1701074294}
+  _jumpForce: {x: 10, y: 20}
+  _postJumpDelay: 0.2
 --- !u!114 &1701074296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 1701074297}
   _rigidbody: {fileID: 1701074294}
-  _jumpForce: {x: 10, y: 20}
+  _slidingDrag: 3
 --- !u!114 &1701074297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,85 +871,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _states:
   - {fileID: 1701074296}
-  _actions: []
---- !u!1 &2146697237
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2146697241}
-  - component: {fileID: 2146697240}
-  - component: {fileID: 2146697239}
-  - component: {fileID: 2146697238}
-  m_Layer: 0
-  m_Name: StateMachineTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2146697238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146697237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d4001a52d8d2d468dd4cf9b878168d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stateMachine: {fileID: 2146697240}
---- !u!114 &2146697239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146697237}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d1821323fc98754791ad724470ef447, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stateMachine: {fileID: 2146697240}
---- !u!114 &2146697240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146697237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13d448791e3bfe47af278c4b3380653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 2146697238}
-  - {fileID: 2146697239}
+  - {fileID: 1701074295}
   _actions:
-  - _name: Toggle
+  - _name: Jump
     _transitions:
     - _from: 0
       _to: 1
+  - _name: Slide
+    _transitions:
     - _from: 1
       _to: 0
---- !u!4 &2146697241
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146697237}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.019669, y: -16.156809, z: -70.474236}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
