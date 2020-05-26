@@ -9,7 +9,7 @@ public class JumpingState : State
     [SerializeField]
     private Vector2 _jumpStrength, _fallStrength;
     [SerializeField]
-    private float _postJumpDelay;
+    private float _postJumpDelay, _wallTouchPadding = 0.5f;
     [SerializeField]
     private AnimationCurve _fallCurve;
 
@@ -23,7 +23,8 @@ public class JumpingState : State
     private IEnumerator ApplyJumpForce (float startTime, float xDirection)
     {
         float timer = 0;
-        while (!Physics.Raycast(transform.position, Vector3.right * xDirection, 1, 0, QueryTriggerInteraction.Ignore))
+        int layerMask = LayerMask.GetMask("Default");
+        while (!Physics.Raycast(transform.position, Vector3.right * xDirection, _wallTouchPadding, layerMask, QueryTriggerInteraction.Ignore))
         {
             float fallX = xDirection * _fallStrength.x;
             float fallY = -_fallCurve.Evaluate(timer) * _fallStrength.y;
@@ -31,5 +32,7 @@ public class JumpingState : State
             yield return null;
             timer = Time.time - startTime;
         }
+        _rigidbody.velocity = Vector3.up * _rigidbody.velocity.y;
+        ChangeState("Slide");
     }
 }

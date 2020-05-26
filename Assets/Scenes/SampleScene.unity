@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 1701074297}
   - component: {fileID: 1701074296}
   - component: {fileID: 1701074295}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,8 +840,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateMachine: {fileID: 1701074297}
   _rigidbody: {fileID: 1701074294}
-  _jumpForce: {x: 10, y: 20}
+  _jumpStrength: {x: 10, y: 20}
+  _fallStrength: {x: 100, y: 2000}
   _postJumpDelay: 0.2
+  _wallTouchPadding: 0.55
+  _fallCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.055095084
+      outSlope: -0.055095084
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: -0.0023994446
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1701074296
 MonoBehaviour:
   m_ObjectHideFlags: 0
