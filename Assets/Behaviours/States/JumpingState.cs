@@ -7,26 +7,29 @@ public class JumpingState : State
     [SerializeField]
     private Rigidbody _rigidbody;
     [SerializeField]
-    private Vector2 _jumpForce;
+    private Vector2 _jumpStrength, _fallStrength;
     [SerializeField]
-    private float _postJumpDelay = 0.2f;
+    private float _postJumpDelay;
+    [SerializeField]
+    private AnimationCurve _fallCurve;
 
     protected override void Enter()
     {
-        var jumpForce = new Vector2(_jumpForce.x * Mathf.Sign(4 - transform.position.x), _jumpForce.y);
-        _rigidbody.AddForce(jumpForce, ForceMode.Impulse);
-        StartCoroutine(WaitForRest());
+        float xDirection = Mathf.Sign(4 - transform.position.x);
+        _rigidbody.AddForce(new Vector2(_jumpStrength.x * xDirection, _jumpStrength.y), ForceMode.VelocityChange);
+        StartCoroutine(ApplyJumpForce(Time.time, xDirection));
     }
 
-    private bool IsAtRest()
+    private IEnumerator ApplyJumpForce (float startTime, float xDirection)
     {
-        return Mathf.Approximately(Mathf.Abs(_rigidbody.velocity.x), 0);
-    }
-
-    private IEnumerator WaitForRest()
-    {
-        yield return new WaitForSeconds(_postJumpDelay);
-        yield return new WaitUntil(IsAtRest);
-        ChangeState("Slide");
+        float timer = 0;
+        while (!Physics.Raycast(transform.position, Vector3.right * xDirection, 1, 0, QueryTriggerInteraction.Ignore))
+        {
+            float fallX = xDirection * _fallStrength.x;
+            float fallY = -_fallCurve.Evaluate(timer) * _fallStrength.y;
+            _rigidbody.AddForce(new Vector2(fallX, fallY) * Time.deltaTime);
+            yield return null;
+            timer = Time.time - startTime;
+        }
     }
 }
