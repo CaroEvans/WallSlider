@@ -1,36 +1,31 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Wall Slider</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-            body {
-                font-family: 'Source Sans Pro', sans-serif;
-            }
+<head>
+    <title>Wall Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
 
-            iframe {
-                display: block;
-                margin: 0 auto;
-            }
-        </style>
-    </head>
-    <body class="bg-near-black">
-        <div class="center pa4 pv5 mv4 mh2 mw7 light-silver">
-            <iframe src="WebGL/index.html" width="620" height="980" frameborder="0"></iframe>
-            <p class="tc f6 gray mv0">Try clicking the game window above if the controls aren't working.</p>
-            <div class="ph5">
-                <div class="flex justify-center items-center w-100">
-                    <i class="fa fa-gamepad dark-pink fa-lg mr2 "></i>
-                    <h3>Controls</h3>
-                </div>
-                <div class="flex flex-wrap justify-between items-center mw5 w-100 center">
-                    <p class="dark-pink ba ph3 pv2 mv0">Space</p>
-                    <div class="gray bb"></div>
-                    <p class="gray ph3 pv2 ba">Jump</p>
-                </div>
-            </div>
+        iframe {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-near-black">
+    <div class="center pa4 mh2 w-100 mw8 light-silver flex flex-wrap justify-center items-center">
+        <div class="mh3">
+            <iframe src="WebGL/index.html" width="370" height="670" frameborder="0"></iframe>
+            <p class="tc f6 gray mt0 mb3">Try clicking the game window above if the controls aren't working.</p>
         </div>
-    </body>
+        <div class="flex flex-wrap justify-between items-center w5 pa3 ba dark-gray mt2">
+            <i class="fa fa-arrows-h gray fa-3x"></i>
+            <p class="dark-pink ba ph3 pv2 mv0">Space</p>
+        </div>
+    </div>
+</body>
 </html>
