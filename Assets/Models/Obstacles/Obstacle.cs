@@ -8,6 +8,6 @@ namespace Obstacles
     /// </summary>
     public abstract class Obstacle
     {
-        public abstract RectInt Fill(RectInt area);
+        public abstract RectInt Fill(RectInt area, float difficulty);
     }
 }

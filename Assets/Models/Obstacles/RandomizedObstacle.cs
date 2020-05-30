@@ -13,9 +13,9 @@ namespace Obstacles
             _random = random;
         }
 
-        public override UnityEngine.RectInt Fill(UnityEngine.RectInt area)
+        public override UnityEngine.RectInt Fill(UnityEngine.RectInt area, float difficulty)
         {
-            return _obstacles[_random.Next(0, _obstacles.Length)].Fill(area);
+            return _obstacles[_random.Next(0, _obstacles.Length)].Fill(area, difficulty);
         }
     }
 }

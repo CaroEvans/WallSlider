@@ -3,14 +3,13 @@ using Chutes;
 using System.Linq;
 using Obstacles;
 using System.Collections;
-using ExtensionMethods;
+using Levels;
+using Values;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
     private AnimationCurve[] _paths;
-    [SerializeField, Range(0, 0.5f)]
-    private float _spawnThreshold;
     [SerializeField]
     private ObjectFactory _factory;
     [SerializeField]
@@ -23,16 +22,23 @@ public class Spawner : MonoBehaviour
     private int _xOffset;
     [SerializeField, Range(3, 25)]
     private int _chunkHeight;
+    [SerializeField]
+    private AnimationCurve _difficultyCurve;
 
     IEnumerator Start()
     {
-        Chute chute = new EvenChute(_chunkHeight);
-        var obstacles = _paths.Select(p => new ObjectStringObstacle(p, _spawnThreshold, _factory)).ToArray();
-        var randomizedObstacle = new RandomizedObstacle(new System.Random(), obstacles);
         var origin = new RectInt(Vector2Int.right * _xOffset, Vector2Int.right * _chuteWidth);
-        foreach (var rect in chute.From(origin).Select(randomizedObstacle.Fill))
-        {
-            yield return new WaitUntil(() => _player.position.y < rect.yMax);
-        }
+        yield return new Level(Chute(), Obstacle(), _difficultyCurve).Play(origin, _player);
+    }
+
+    private Chute Chute()
+    {
+        return new DebugChute(new EvenChute(_chunkHeight));
+    }
+
+    private Obstacle Obstacle()
+    {
+        var obstacles = _paths.Select(p => new ObjectStringObstacle(p, _factory, new FloatRange(0.1f, 0.4f))).ToArray();
+        return new RandomizedObstacle(new System.Random(), obstacles);
     }
 }
