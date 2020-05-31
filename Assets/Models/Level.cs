@@ -24,7 +24,7 @@ namespace Levels
             int spawnedChunks = 0;
             foreach (var rect in _chute.From(origin).Skip(1))
             {
-                float difficulty = _difficultyCurve.Evaluate(spawnedChunks);
+                float difficulty = _difficultyCurve.Evaluate(spawnedChunks++);
                 _obstacle.Fill(rect, difficulty);
                 yield return new WaitUntil(() => player.position.y < rect.yMax);
             }
