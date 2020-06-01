@@ -13,8 +13,6 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private ObjectFactory _factory;
     [SerializeField]
-    private Hashtable _hashTable;
-    [SerializeField]
     private Transform _player;
     [SerializeField, Range(1, 15)]
     private int _chuteWidth = 12;
@@ -23,12 +21,13 @@ public class Spawner : MonoBehaviour
     [SerializeField, Range(3, 25)]
     private int _chunkHeight;
     [SerializeField]
-    private AnimationCurve _difficultyCurve;
+    private ChainedCurves _difficulty;
 
     IEnumerator Start()
     {
         var origin = new RectInt(Vector2Int.right * _xOffset, Vector2Int.right * _chuteWidth);
-        yield return new Level(Chute(), Obstacle(), _difficultyCurve).Play(origin, _player);
+        var level = new Level(Chute(), Obstacle(), _difficulty.Evaluate);
+        yield return level.Play(origin, _player);
     }
 
     private Chute Chute()

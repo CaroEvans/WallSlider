@@ -1,5 +1,6 @@
 ﻿using Chutes;
 using Obstacles;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -10,13 +11,13 @@ namespace Levels
     {
         private readonly Chute _chute;
         private readonly Obstacle _obstacle;
-        private readonly AnimationCurve _difficultyCurve;
+        private readonly Func<float, float> _difficultyFunction;
 
-        public Level(Chute chute, Obstacle obstacle, AnimationCurve difficultyCurve)
+        public Level(Chute chute, Obstacle obstacle, Func<float, float> difficultyFunction)
         {
             _chute = chute;
             _obstacle = obstacle;
-            _difficultyCurve = difficultyCurve;
+            _difficultyFunction = difficultyFunction;
         }
 
         public IEnumerator Play(RectInt origin, Transform player)
@@ -24,8 +25,7 @@ namespace Levels
             int spawnedChunks = 0;
             foreach (var rect in _chute.From(origin).Skip(1))
             {
-                float difficulty = _difficultyCurve.Evaluate(spawnedChunks++);
-                _obstacle.Fill(rect, difficulty);
+                _obstacle.Fill(rect, _difficultyFunction.Invoke(spawnedChunks++));
                 yield return new WaitUntil(() => player.position.y < rect.yMax);
             }
         }
