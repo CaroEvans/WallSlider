@@ -25,11 +25,6 @@ public class CameraFocus : MonoBehaviour
         transform.SetParent(null);
     }
 
-    // TODO: Implement a camera shake
-    public void Shake ()
-    {
-    }
-
     private IEnumerator FollowTarget ()
     {
         while (true)

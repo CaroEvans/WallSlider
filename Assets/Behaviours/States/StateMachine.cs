@@ -20,7 +20,5 @@ public class StateMachine : MonoBehaviour
         var currentState = _states.First(state => state.enabled);
         var fromIndex = Array.IndexOf(_states, currentState);
         var activatedAction = _actions.FirstOrDefault(a => a.Activate(_states, fromIndex, action));
-        if (activatedAction == null)
-            throw new System.Exception($"Failed to change state via {action} from {currentState.GetType().Name}");
     }
 }
