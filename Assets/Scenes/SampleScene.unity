@@ -10609,6 +10609,7 @@ GameObject:
   - component: {fileID: 1701074297}
   - component: {fileID: 1701074296}
   - component: {fileID: 1701074295}
+  - component: {fileID: 1701074298}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -10783,6 +10784,7 @@ MonoBehaviour:
   _states:
   - {fileID: 1701074296}
   - {fileID: 1701074295}
+  - {fileID: 1701074298}
   _actions:
   - _name: Jump
     _transitions:
@@ -10792,3 +10794,26 @@ MonoBehaviour:
     _transitions:
     - _from: 1
       _to: 0
+  - _name: Die
+    _transitions:
+    - _from: 0
+      _to: 2
+    - _from: 1
+      _to: 2
+--- !u!114 &1701074298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701074289}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4da162697d01544cb24357e07d4c706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateMachine: {fileID: 1701074297}
+  _cameraFocus: {fileID: 963194229}
+  _rigidBody: {fileID: 1701074294}
+  _collider: {fileID: 1701074290}
+  _fallDistance: 15

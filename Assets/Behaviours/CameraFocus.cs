@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CameraFocus : MonoBehaviour
 {
@@ -13,14 +14,34 @@ public class CameraFocus : MonoBehaviour
 
     private float _velocity = 0;
 
-    void Update()
+    public void Start ()
     {
-        float accel = _accelationCurve.Evaluate(Mathf.Abs(_velocity));
-        _velocity = Mathf.MoveTowards(_velocity, _target.velocity.y, Time.deltaTime * _velocityAcceleration * Mathf.Max(accel, 0));
-        float clampedVelocity = Mathf.Clamp(_velocity, -_limit, _limit) * _velocityScale;
-        Vector3 targetPos = Vector2.MoveTowards(transform.localPosition, Vector2.up * clampedVelocity, Time.deltaTime * _moveSpeed);
-        targetPos.x = _anchorX - _target.transform.position.x;
-        targetPos.z = transform.localPosition.z;
-        transform.localPosition = targetPos;
+        StartCoroutine(FollowTarget());
+    }
+
+    public void Detach ()
+    {
+        StopAllCoroutines();
+        transform.SetParent(null);
+    }
+
+    // TODO: Implement a camera shake
+    public void Shake ()
+    {
+    }
+
+    private IEnumerator FollowTarget ()
+    {
+        while (true)
+        {
+            float accel = _accelationCurve.Evaluate(Mathf.Abs(_velocity));
+            _velocity = Mathf.MoveTowards(_velocity, _target.velocity.y, Time.deltaTime * _velocityAcceleration * Mathf.Max(accel, 0));
+            float clampedVelocity = Mathf.Clamp(_velocity, -_limit, _limit) * _velocityScale;
+            Vector3 targetPos = Vector2.MoveTowards(transform.localPosition, Vector2.up * clampedVelocity, Time.deltaTime * _moveSpeed);
+            targetPos.x = _anchorX - _target.transform.position.x;
+            targetPos.z = transform.localPosition.z;
+            transform.localPosition = targetPos;
+            yield return null;
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3336169720563385887}
   - component: {fileID: 5052558195529785181}
   - component: {fileID: 694434333332727576}
+  - component: {fileID: 1130156031894166525}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -43,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.8, y: 0.8, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &694434333332727576
 SpriteRenderer:
@@ -95,3 +96,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1130156031894166525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8247535799778249382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0640f3fd6480e7418c35d054ad20cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _action: Die
