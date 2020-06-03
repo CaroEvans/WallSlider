@@ -23,11 +23,10 @@ namespace Levels
         public IEnumerator Play(RectInt origin, Transform player)
         {
             int spawnedChunks = 0;
-            foreach (var rect in _chute.From(origin).Skip(1).Take(10))
+            foreach (var rect in _chute.From(origin).Skip(1))
             {
                 _obstacle.Fill(rect, _difficultyFunction.Invoke(spawnedChunks++));
-                //yield return new WaitUntil(() => player.position.y < rect.yMax);
-                yield return null;
+                yield return new WaitUntil(() => player.position.y < rect.yMax);
             }
         }
     }

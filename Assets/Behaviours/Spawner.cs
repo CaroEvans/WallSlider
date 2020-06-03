@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
 
     private Chute Chute()
     {
-        return new DebugChute(new EvenChute(_chunkHeight));
+        return new EvenChute(_chunkHeight);
     }
 
     private Obstacle Obstacle()
