@@ -23,6 +23,9 @@ public class CameraFocus : MonoBehaviour
     {
         StopAllCoroutines();
         transform.SetParent(null);
+        Vector3 position = transform.position;
+        position.x = 4;
+        transform.position = position;
     }
 
     private IEnumerator FollowTarget ()
