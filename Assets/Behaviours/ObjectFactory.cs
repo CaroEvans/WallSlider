@@ -7,7 +7,7 @@ public class ObjectFactory : MonoBehaviour
 
     public virtual GameObject Create(Vector3 position)
     {
-        return Instantiate(_prefab, position, transform.rotation);
+        return Instantiate(_prefab, position, transform.rotation, transform);
     }
 
     public virtual void DisposeOf(GameObject obj)

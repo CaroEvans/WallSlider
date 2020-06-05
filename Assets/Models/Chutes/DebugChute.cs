@@ -20,6 +20,7 @@ namespace Chutes
             foreach (var rect in _chute.From(origin))
             {
                 Debug.DrawLine(new Vector2(rect.xMin, rect.yMax), new Vector2(rect.xMax, rect.yMax), Color.cyan, float.MaxValue);
+                Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMax, rect.yMin), Color.cyan, float.MaxValue);
                 yield return rect;
             }
         }
