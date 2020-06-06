@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Values
 {
     [Serializable]
-    public class ChainedCurves
+    public class ChainedCurves : Curve
     {
         [SerializeField]
         private AnimationCurve[] _curves;
@@ -19,7 +18,7 @@ namespace Values
             _curves = curves;
         }
 
-        public float Evaluate (float time)
+        public override float Evaluate (float time)
         {
             return SelectCurve(time).Evaluate(time);
         }

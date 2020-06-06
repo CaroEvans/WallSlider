@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     IEnumerator Start()
     {
         var origin = new RectInt(Vector2Int.right * _xOffset, Vector2Int.right * _chuteWidth);
-        var level = new Level(Chute(), Obstacle(), _difficulty.Evaluate);
+        var level = new Level(Chute(), Obstacle(), Difficulty());
         yield return level.Play(origin, _player);
     }
 
@@ -36,5 +36,10 @@ public class Spawner : MonoBehaviour
     private Obstacle Obstacle()
     {
         return new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
+    }
+
+    private Curve Difficulty()
+    {
+        return new FuzzyCurve(_difficulty, new System.Random(), new FloatRange(-0.1f, 0.1f));
     }
 }
