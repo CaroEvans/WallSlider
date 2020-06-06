@@ -9,8 +9,6 @@ using Values;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private AnimationCurve[] _paths;
-    [SerializeField]
     private ObjectFactory _factory;
     [SerializeField]
     private Transform _player;
@@ -37,7 +35,6 @@ public class Spawner : MonoBehaviour
 
     private Obstacle Obstacle()
     {
-        var obstacles = _paths.Select(p => new ObjectStringObstacle(p, _factory, new FloatRange(0.1f, 0.4f))).ToArray();
-        return new RandomizedObstacle(new System.Random(), obstacles);
+        return new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
     }
 }
