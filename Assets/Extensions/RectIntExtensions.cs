@@ -17,7 +17,7 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Draw a rectangle as a horizontal line for debugging purposes.
+        /// Draws a horizontal line spanning the width of the rect at each y position it covers.
         /// </summary>
         /// <param name="rect">The rectangle to be drawn.</param>
         /// <returns>The rectangle that was drawn.</returns>
@@ -39,6 +39,43 @@ namespace ExtensionMethods
         {
             for (int y = rect.yMax; y > rect.yMin; y--)
                 yield return y;
+        }
+
+        /// <summary>
+        /// Extend the rect to contain a given point if it is not already included.
+        /// </summary>
+        /// <param name="rect">The rect to be extended.</param>
+        /// <param name="point">The point that should be covered by the rect.</param>
+        /// <returns>The rect that covers the given point.</returns>
+        public static RectInt ExtendToCover(this RectInt rect, Vector2 point)
+        {
+            var minAnchor = new Vector2Int(
+                Mathf.FloorToInt(Mathf.Min(rect.xMin, point.x)),
+                Mathf.FloorToInt(Mathf.Min(rect.yMin, point.y))
+            );
+            var dimensions = new Vector2Int(
+                rect.xMax == int.MaxValue ? 0 : Mathf.Max(rect.width, Mathf.CeilToInt(Mathf.Max(rect.xMax, point.x) - minAnchor.x)),
+                rect.yMax == int.MaxValue ? 0 : Mathf.Max(rect.height, Mathf.CeilToInt(Mathf.Max(rect.yMax, point.y) - minAnchor.y))
+            );
+            return new RectInt(minAnchor, dimensions);
+        }
+
+        /// <summary>
+        /// Draw the boundaries of the rect for debugging purposes.
+        /// </summary>
+        /// <param name="rect">The rectangle to be drawn.</param>
+        /// <param name="color">The color of the lines.</param>
+        /// <returns>The rectangle that was drawn.</returns>
+        public static RectInt DrawBounds(this RectInt rect, Color color, float scaleOffset = 0)
+        {
+            var offset = Vector2.one * scaleOffset;
+            var original = rect;
+            rect = rect.ExtendToCover(rect.min - offset).ExtendToCover(rect.max + offset);
+            Debug.DrawLine(new Vector2(rect.xMin, rect.yMax), new Vector2(rect.xMax, rect.yMax), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMax, rect.yMin), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMin, rect.yMax), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(rect.xMax, rect.yMin), new Vector2(rect.xMax, rect.yMax), color, float.MaxValue);
+            return original;
         }
     }
 }

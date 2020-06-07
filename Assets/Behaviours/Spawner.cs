@@ -30,12 +30,14 @@ public class Spawner : MonoBehaviour
 
     private Chute Chute()
     {
-        return new EvenChute(_chunkHeight);
+        var evenChute = new EvenChute(_chunkHeight);
+        return new DebugChute(evenChute);
     }
 
     private Obstacle Obstacle()
     {
-        return new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
+        var obstacle = new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
+        return new DebugObstacle(obstacle);
     }
 
     private Curve Difficulty()

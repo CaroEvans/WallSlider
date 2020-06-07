@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ExtensionMethods;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Chutes
@@ -17,12 +19,12 @@ namespace Chutes
 
         public override IEnumerable<RectInt> From(RectInt origin)
         {
-            foreach (var rect in _chute.From(origin))
-            {
-                Debug.DrawLine(new Vector2(rect.xMin, rect.yMax), new Vector2(rect.xMax, rect.yMax), Color.cyan, float.MaxValue);
-                Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMax, rect.yMin), Color.cyan, float.MaxValue);
-                yield return rect;
-            }
+            return _chute.From(origin).Select(Draw);
+        }
+
+        private RectInt Draw(RectInt rect)
+        {
+            return rect.DrawBounds(Color.cyan);
         }
     }
 }

@@ -24,14 +24,19 @@ namespace Obstacles
 
         public override RectInt Fill(RectInt area, float difficulty)
         {
+            RectInt areaUsed = new RectInt(Vector2Int.one * int.MaxValue, Vector2Int.zero);
             foreach (var y in area.FromTopToBottom().Skip(1))
             {
                 var t = Mathf.InverseLerp(-1, 1, Mathf.Sin((y + _offset) * _amplitude.FromNormal(difficulty)));
                 if(Mathf.Abs(t - 0.5f) > _spawnThreshold.FromNormal(difficulty))
-                    _objectFactory.Create(new Vector2(Mathf.Lerp(area.xMin, area.xMax, 1 - Mathf.Round(t)), y));
+                {
+                    var position = new Vector2(Mathf.Lerp(area.xMin, area.xMax, 1 - Mathf.Round(t)), y);
+                    areaUsed = areaUsed.ExtendToCover(position);
+                    _objectFactory.Create(position);
+                }
             }
 
-            return area;
+            return areaUsed;
         }
     }
 }
