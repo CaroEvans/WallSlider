@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
     private Obstacle Obstacle()
     {
         var obstacle = new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
-        return new DebugObstacle(obstacle);
+        return new PaddedEndsDecorator(new DebugObstacle(obstacle), _factory);
     }
 
     private Curve Difficulty()

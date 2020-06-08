@@ -10,10 +10,21 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="rect">The rectangle that will act as the point of origin.</param>
         /// <param name="height">The desired height of the new rectangle.</param>
-        /// <returns>The new rectangle directly below the provided rectangle.</returns>
+        /// <returns>The new rectangle directly below the origin rectangle.</returns>
         public static RectInt BuildBelow (this RectInt rect, int height)
         {
             return new RectInt(rect.position + (Vector2Int.down * height), new Vector2Int(rect.width, height));
+        }
+
+        /// <summary>
+        /// Builds a new rectangle starting from above the given rectangle and extending upwards.
+        /// </summary>
+        /// <param name="rect">The rectangle that will act as the point of origin.</param>
+        /// <param name="height">The desired height of the new rectangle.</param>
+        /// <returns>The new rectangle directly abpve the origin rectangle.</returns>
+        public static RectInt BuildAbove(this RectInt rect, int height)
+        {
+            return new RectInt(rect.position + Vector2Int.up * (rect.height), new Vector2Int(rect.width, height));
         }
 
         /// <summary>
@@ -66,16 +77,15 @@ namespace ExtensionMethods
         /// <param name="rect">The rectangle to be drawn.</param>
         /// <param name="color">The color of the lines.</param>
         /// <returns>The rectangle that was drawn.</returns>
-        public static RectInt DrawBounds(this RectInt rect, Color color, float scaleOffset = 0)
+        public static RectInt DrawBounds(this RectInt rect, Color color, Vector2 offset)
         {
-            var offset = Vector2.one * scaleOffset;
             var original = rect;
-            rect = rect.ExtendToCover(rect.min - offset).ExtendToCover(rect.max + offset);
-            Debug.DrawLine(new Vector2(rect.xMin, rect.yMax), new Vector2(rect.xMax, rect.yMax), color, float.MaxValue);
-            Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMax, rect.yMin), color, float.MaxValue);
-            Debug.DrawLine(new Vector2(rect.xMin, rect.yMin), new Vector2(rect.xMin, rect.yMax), color, float.MaxValue);
-            Debug.DrawLine(new Vector2(rect.xMax, rect.yMin), new Vector2(rect.xMax, rect.yMax), color, float.MaxValue);
-            return original;
+            var offsetRect = new Rect(rect.x - offset.x, rect.y - offset.y, rect.width + offset.x * 2, rect.height + offset.y * 2);
+            Debug.DrawLine(new Vector2(offsetRect.xMin, offsetRect.yMax), new Vector2(offsetRect.xMax, offsetRect.yMax), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(offsetRect.xMin, offsetRect.yMin), new Vector2(offsetRect.xMax, offsetRect.yMin), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(offsetRect.xMin, offsetRect.yMin), new Vector2(offsetRect.xMin, offsetRect.yMax), color, float.MaxValue);
+            Debug.DrawLine(new Vector2(offsetRect.xMax, offsetRect.yMin), new Vector2(offsetRect.xMax, offsetRect.yMax), color, float.MaxValue);
+            return rect;
         }
     }
 }

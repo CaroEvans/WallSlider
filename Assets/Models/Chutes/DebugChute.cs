@@ -24,7 +24,7 @@ namespace Chutes
 
         private RectInt Draw(RectInt rect)
         {
-            return rect.DrawBounds(Color.cyan);
+            return rect.DrawBounds(Color.cyan, Vector2.zero);
         }
     }
 }
