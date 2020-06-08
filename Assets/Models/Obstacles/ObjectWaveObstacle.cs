@@ -25,7 +25,7 @@ namespace Obstacles
         public override RectInt Fill(RectInt area, float difficulty)
         {
             RectInt areaUsed = new RectInt(Vector2Int.one * int.MaxValue, Vector2Int.zero);
-            foreach (var y in area.FromTopToBottom().Skip(1))
+            foreach (var y in area.FromTopToBottom())
             {
                 var t = Mathf.InverseLerp(-1, 1, Mathf.Sin((y + _offset) * _amplitude.FromNormal(difficulty)));
                 if(Mathf.Abs(t - 0.5f) > _spawnThreshold.FromNormal(difficulty))

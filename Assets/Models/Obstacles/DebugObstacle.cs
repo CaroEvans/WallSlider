@@ -17,7 +17,7 @@ namespace Obstacles
 
         public override RectInt Fill(RectInt area, float difficulty)
         {
-            return _obstacle.Fill(area, difficulty).DrawBounds(Color.red, Vector2.right * 0.4f);
+            return _obstacle.Fill(area, difficulty).DrawBounds(Color.red, Vector2.one * 0.5f);
         }
     }
 }

@@ -42,13 +42,13 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Iterate over each y position starting from the max and ending with the min.
+        /// Iterate over each y position between the maximum y and the minimum y.
         /// </summary>
         /// <param name="rect">The rectangle used to provide the range of values..</param>
         /// <returns>An enumerable containing each y position within the rectangle in descending order.</returns>
         public static IEnumerable<int> FromTopToBottom (this RectInt rect)
         {
-            for (int y = rect.yMax; y > rect.yMin; y--)
+            for (int y = rect.yMax - 1; y > rect.yMin; y--)
                 yield return y;
         }
 

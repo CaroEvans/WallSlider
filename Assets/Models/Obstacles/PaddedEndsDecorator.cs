@@ -27,11 +27,10 @@ namespace Obstacles
 
         private void FillWithRewards(RectInt rect)
         {
-            if(rect.height > 0)
+            foreach(var y in rect.FromTopToBottom())
             {
-                rect.DrawBounds(Color.green, new Vector2(0.4f, 0f));
+                new RectInt(rect.x, y, 0, 0).DrawBounds(Color.green, Vector2.one * 0.2f);
             }
         }
     }
 }
-
