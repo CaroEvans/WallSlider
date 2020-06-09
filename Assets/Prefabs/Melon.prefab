@@ -110,6 +110,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 620710769584189041}
     m_Modifications:
+    - target: {fileID: -2164753977314128663, guid: 162025d0be3a91b468ebe3d856cd5989,
+        type: 3}
+      propertyPath: _onContacted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 1812421782640042163, guid: 162025d0be3a91b468ebe3d856cd5989,
         type: 3}
       propertyPath: m_LocalPosition.x

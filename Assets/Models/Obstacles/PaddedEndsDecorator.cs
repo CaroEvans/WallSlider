@@ -20,17 +20,20 @@ namespace Obstacles
             var obstacleBounds = _obstacle.Fill(area, difficulty);
             if(obstacleBounds.width == 0)
             {
-                FillWithRewards(obstacleBounds.BuildAbove(area.yMax - obstacleBounds.yMax));
-                FillWithRewards(obstacleBounds.BuildBelow(obstacleBounds.yMin - area.yMin));
+                Fill(obstacleBounds.BuildAbove(area.yMax - obstacleBounds.yMax));
+                Fill(obstacleBounds.BuildBelow(obstacleBounds.yMin - area.yMin));
             }
             return obstacleBounds;
         }
 
-        private void FillWithRewards(RectInt rect)
+        private void Fill(RectInt rect)
         {
-            foreach(var y in rect.FromTopToBottom())
+            if(rect.height > 1)
             {
-                new RectInt(rect.x, y, 0, 0).DrawBounds(Color.green, Vector2.one * 0.2f);
+                foreach (var y in rect.FromTopToBottom())
+                {
+                    _objectFactory.Create(new Vector2(rect.x, y));
+                }
             }
         }
     }

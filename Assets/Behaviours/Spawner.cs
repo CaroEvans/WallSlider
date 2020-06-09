@@ -5,11 +5,14 @@ using Obstacles;
 using System.Collections;
 using Levels;
 using Values;
+using ObjectFactories;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
     private PrefabFactory _factory;
+    [SerializeField]
+    private PrefabFactory[] _fruitFactories;
     [SerializeField]
     private Transform _player;
     [SerializeField, Range(1, 15)]
@@ -37,7 +40,7 @@ public class Spawner : MonoBehaviour
     private Obstacle Obstacle()
     {
         var obstacle = new ObjectWaveObstacle(_factory, Random.Range(0, Mathf.PI * 10), new FloatRange(0.2f, 0.5f), new FloatRange(0.4f, 0.2f));
-        return new PaddedEndsDecorator(new DebugObstacle(obstacle), _factory);
+        return new PaddedEndsDecorator(new DebugObstacle(obstacle), new RandomizedFactory(_fruitFactories, new System.Random()));
     }
 
     private Curve Difficulty()
