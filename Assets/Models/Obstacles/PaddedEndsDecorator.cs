@@ -1,4 +1,5 @@
 ﻿using ExtensionMethods;
+using ObjectFactories;
 using UnityEngine;
 
 namespace Obstacles
@@ -6,9 +7,9 @@ namespace Obstacles
     public class PaddedEndsDecorator : Obstacle
     {
         private readonly Obstacle _obstacle;
-        private readonly ObjectFactory _objectFactory;
+        private readonly IObjectFactory _objectFactory;
 
-        public PaddedEndsDecorator(Obstacle obstacle, ObjectFactory objectFactory)
+        public PaddedEndsDecorator(Obstacle obstacle, IObjectFactory objectFactory)
         {
             _obstacle = obstacle;
             _objectFactory = objectFactory;

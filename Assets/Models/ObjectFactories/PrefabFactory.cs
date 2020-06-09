@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using ObjectFactories;
+using UnityEngine;
 
-public class ObjectFactory : MonoBehaviour
+public class PrefabFactory : MonoBehaviour, IObjectFactory
 {
     [SerializeField]
     private GameObject _prefab;

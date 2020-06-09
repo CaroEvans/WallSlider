@@ -9,7 +9,7 @@ using Values;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private ObjectFactory _factory;
+    private PrefabFactory _factory;
     [SerializeField]
     private Transform _player;
     [SerializeField, Range(1, 15)]

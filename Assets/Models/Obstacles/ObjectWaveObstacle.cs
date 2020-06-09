@@ -1,5 +1,5 @@
 ﻿using ExtensionMethods;
-using System.Linq;
+using ObjectFactories;
 using UnityEngine;
 using Values;
 
@@ -10,11 +10,11 @@ namespace Obstacles
     /// </summary>
     public class ObjectWaveObstacle : Obstacle
     {
-        private readonly ObjectFactory _objectFactory;
+        private readonly IObjectFactory _objectFactory;
         private readonly float _offset;
         private readonly Range<float> _amplitude, _spawnThreshold;
 
-        public ObjectWaveObstacle(ObjectFactory objectFactory, float offset, Range<float> amplitude, Range<float> spawnThreshold)
+        public ObjectWaveObstacle(IObjectFactory objectFactory, float offset, Range<float> amplitude, Range<float> spawnThreshold)
         {
             _objectFactory = objectFactory;
             _offset = offset;
