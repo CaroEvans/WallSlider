@@ -22,11 +22,14 @@ public class DeadState : State
     private PhysicMaterial _deadMaterial;
     [SerializeField]
     private ParticleSystem _deathParticles;
+    [SerializeField]
+    private Distance _distance;
 
     protected override void Enter()
     {
         StartCoroutine(StopAfterFalling(transform.position.y));
         StartCoroutine(WaitForRestart());
+        _distance.enabled = false;
         _cameraFocus.Detach();
         Vector2 randomForce = Random.insideUnitCircle;
         Vector2 forceFromCurves = new Vector2(_xForce.Evaluate(randomForce.x), _yForce.Evaluate(randomForce.y));
@@ -46,6 +49,7 @@ public class DeadState : State
 
     private IEnumerator WaitForRestart ()
     {
+        yield return new WaitForSeconds(0.3f);
         yield return new WaitUntil(() => Input.anyKeyDown);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
