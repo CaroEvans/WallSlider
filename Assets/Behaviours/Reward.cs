@@ -9,6 +9,5 @@ public class Reward : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         _onCollected.Invoke();
-        transform.parent.gameObject.SetActive(false);
     }
 }
