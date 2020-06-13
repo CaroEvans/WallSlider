@@ -9,18 +9,25 @@ public class Distance : MonoBehaviour
 
     [SerializeField]
     private DistanceEvent _onUpdated = new DistanceEvent();
-    [SerializeField]
-    private float _distanceScale = 0.3f;
 
     private int _previousDistance = -1;
 
     public void Update()
-    {
-        int currentDistance = Mathf.FloorToInt(-transform.position.y * _distanceScale);
-        if (currentDistance > _previousDistance)
+    { 
+        if (Current() > _previousDistance)
         {
-            _previousDistance = currentDistance;
-            _onUpdated.Invoke(currentDistance);
+            _previousDistance = Current();
+            _onUpdated.Invoke(Current());
         }
+    }
+
+    public void CheckBest(HighScore highScore)
+    {
+        highScore.Check(Current());
+    }
+
+    private int Current()
+    {
+        return Mathf.FloorToInt(-transform.position.y);
     }
 }

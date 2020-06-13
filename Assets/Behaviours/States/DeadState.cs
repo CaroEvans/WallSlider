@@ -24,9 +24,12 @@ public class DeadState : State
     private ParticleSystem _deathParticles;
     [SerializeField]
     private Distance _distance;
+    [SerializeField]
+    private HighScore _highScore;
 
     protected override void Enter()
     {
+        _distance.CheckBest(_highScore);
         StartCoroutine(StopAfterFalling(transform.position.y));
         StartCoroutine(WaitForRestart());
         _distance.enabled = false;
