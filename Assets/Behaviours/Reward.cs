@@ -5,9 +5,12 @@ public class Reward : MonoBehaviour
 {
     [SerializeField]
     private UnityEvent _onCollected = new UnityEvent();
+    [SerializeField]
+    private LayerMask _mask;
 
     public void OnTriggerEnter(Collider other)
     {
-        _onCollected.Invoke();
+        if(_mask == (_mask | (1 << other.gameObject.layer)))
+            _onCollected.Invoke();
     }
 }

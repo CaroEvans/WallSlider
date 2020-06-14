@@ -29,6 +29,7 @@ public class DeadState : State
 
     protected override void Enter()
     {
+        gameObject.layer = 8;
         _distance.CheckBest(_highScore);
         StartCoroutine(StopAfterFalling(transform.position.y));
         StartCoroutine(WaitForRestart());
