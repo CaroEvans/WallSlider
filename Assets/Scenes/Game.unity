@@ -10935,6 +10935,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _landingParticles: {fileID: 462167348}
+  _spawner: {fileID: 1659032971}
 --- !u!114 &1701074296
 MonoBehaviour:
   m_ObjectHideFlags: 0

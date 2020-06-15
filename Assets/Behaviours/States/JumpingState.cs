@@ -14,6 +14,8 @@ public class JumpingState : State
     private AnimationCurve _fallCurve;
     [SerializeField]
     private ParticleSystem _landingParticles;
+    [SerializeField]
+    private Spawner _spawner;
 
     protected override void Enter()
     {
@@ -23,6 +25,11 @@ public class JumpingState : State
         _landingParticles.transform.localEulerAngles = Vector3.up * (xDirection > 0 ? 0 : 180);
         _landingParticles.transform.localPosition = Vector3.right * 0.5f * -xDirection;
         _landingParticles.Play();
+    }
+
+    protected override void Exit()
+    {
+        StartCoroutine(_spawner.BounceItems(transform.position));
     }
 
     private IEnumerator ApplyJumpForce (float startTime, float xDirection)
