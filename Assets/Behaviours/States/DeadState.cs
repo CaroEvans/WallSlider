@@ -26,9 +26,12 @@ public class DeadState : State
     private Distance _distance;
     [SerializeField]
     private HighScore _highScore;
+    [SerializeField]
+    private Animator _animator;
 
     protected override void Enter()
     {
+        _animator.SetTrigger("Die");
         gameObject.layer = 8;
         _distance.CheckBest(_highScore);
         StartCoroutine(StopAfterFalling(transform.position.y));

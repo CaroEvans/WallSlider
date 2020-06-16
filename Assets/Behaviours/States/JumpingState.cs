@@ -16,9 +16,14 @@ public class JumpingState : State
     private ParticleSystem _landingParticles;
     [SerializeField]
     private Spawner _spawner;
+    [SerializeField]
+    private SpriteRenderer _renderer;
+    [SerializeField]
+    private Animator _animator;
 
     protected override void Enter()
     {
+        _animator.SetTrigger("Jump");
         float xDirection = Mathf.Sign(4 - transform.position.x);
         _rigidbody.AddForce(new Vector2(_jumpStrength.x * xDirection, _jumpStrength.y), ForceMode.VelocityChange);
         StartCoroutine(ApplyJumpForce(Time.time, xDirection));
@@ -30,6 +35,8 @@ public class JumpingState : State
     protected override void Exit()
     {
         StartCoroutine(_spawner.BounceItems(transform.position));
+        _renderer.flipX = !_renderer.flipX;
+        _animator.SetTrigger("Land");
     }
 
     private IEnumerator ApplyJumpForce (float startTime, float xDirection)
