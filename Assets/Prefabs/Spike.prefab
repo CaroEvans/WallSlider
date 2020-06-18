@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3336169720563385887}
   - component: {fileID: 5052558195529785181}
   - component: {fileID: 694434333332727576}
-  - component: {fileID: 1130156031894166525}
+  - component: {fileID: -5039250991469284507}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1130156031894166525
+--- !u!114 &-5039250991469284507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8247535799778249382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0640f3fd6480e7418c35d054ad20cdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c71a20a57b976d42a424559c3b65a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action: Die
