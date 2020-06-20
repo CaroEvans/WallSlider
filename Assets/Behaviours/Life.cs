@@ -1,42 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using Values;
 
 [RequireComponent(typeof(StateMachine))]
-public class Life : MonoBehaviour
+public class Life : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private StateMachine _stateMachine;
     [SerializeField]
-    private AnimationFlag _immunityStatus, _shieldStatus;
+    private AnimationFlag _immunityStatus;
     [SerializeField]
     private float _immunityDuration = 3f;
-    [SerializeField]
-    private ParticleSystem _shieldDropEffect;
-    [SerializeField]
-    private Text _fruitLabel;
-
-    private int _fruitCollected = 0;
 
     public void Damage ()
     {
         if(!_immunityStatus.Active)
         {
-            if (_shieldStatus.Active)
-            {
-                StartCoroutine(Immunity());
-                _shieldStatus.Active = false;
-                _shieldDropEffect.Play();
-            } else {
-                _stateMachine.Change("Die");
-            }
+            _stateMachine.Change("Die");
         }
     }
 
-    public void AddFruit ()
+    public void GrantImmunity()
     {
-        _fruitLabel.text = (++_fruitCollected).ToString();
+        StartCoroutine(Immunity());
     }
 
     private IEnumerator Immunity ()

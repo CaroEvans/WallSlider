@@ -4954,3 +4954,4 @@ MonoBehaviour:
   _mask:
     serializedVersion: 2
     m_Bits: 55
+  _color: {r: 0.8000001, g: 0.18823531, b: 0.28235295, a: 1}
