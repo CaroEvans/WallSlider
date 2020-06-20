@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Values;
 
 [RequireComponent(typeof(StateMachine))]
@@ -13,6 +14,10 @@ public class Life : MonoBehaviour
     private float _immunityDuration = 3f;
     [SerializeField]
     private ParticleSystem _shieldDropEffect;
+    [SerializeField]
+    private Text _fruitLabel;
+
+    private int _fruitCollected = 0;
 
     public void Damage ()
     {
@@ -29,6 +34,10 @@ public class Life : MonoBehaviour
         }
     }
 
+    public void AddFruit ()
+    {
+        _fruitLabel.text = (++_fruitCollected).ToString();
+    }
 
     private IEnumerator Immunity ()
     {
