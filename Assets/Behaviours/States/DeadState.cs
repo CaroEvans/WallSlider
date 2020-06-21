@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Views;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -28,6 +29,8 @@ public class DeadState : State
     private HighScore _highScore;
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private TransitionScreen _screen;
 
     protected override void Enter()
     {
@@ -58,6 +61,6 @@ public class DeadState : State
     {
         yield return new WaitForSeconds(0.3f);
         yield return new WaitUntil(() => Input.anyKeyDown);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _screen.Reverse(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 }
