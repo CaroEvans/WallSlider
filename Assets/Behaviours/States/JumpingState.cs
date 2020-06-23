@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class JumpingState : State
@@ -20,9 +21,12 @@ public class JumpingState : State
     private SpriteRenderer _renderer;
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private UnityEvent _onJumped;
 
     protected override void Enter()
     {
+        _onJumped.Invoke();
         _animator.SetTrigger("Jump");
         float xDirection = Mathf.Sign(4 - transform.position.x);
         _rigidbody.AddForce(new Vector2(_jumpStrength.x * xDirection, _jumpStrength.y), ForceMode.VelocityChange);

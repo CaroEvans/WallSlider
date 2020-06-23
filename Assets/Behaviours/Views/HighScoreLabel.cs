@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Views
 {
@@ -17,6 +18,8 @@ namespace Views
         private float _fadeDuration;
         [SerializeField]
         private CanvasGroup _group;
+        [SerializeField]
+        private UnityEvent _onReached;
 
         public void Render(int distance)
         {
@@ -28,6 +31,7 @@ namespace Views
         public void OnTriggerEnter(Collider other)
         {
             StartCoroutine(ReachedAnimation());
+            _onReached.Invoke();
         }
 
         private IEnumerator Fade(float start, float end)
