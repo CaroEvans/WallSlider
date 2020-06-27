@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Views;
 
@@ -31,10 +32,13 @@ public class DeadState : State
     private Animator _animator;
     [SerializeField]
     private TransitionScreen _screen;
+    [SerializeField]
+    private UnityEvent _onDied;
 
     protected override void Enter()
     {
         _animator.SetTrigger("Die");
+        _onDied.Invoke();
         gameObject.layer = 8;
         _distance.CheckBest(_highScore);
         StartCoroutine(StopAfterFalling(transform.position.y));
