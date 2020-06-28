@@ -26,7 +26,7 @@ public class Distance : MonoBehaviour
         highScore.Check(Current());
     }
 
-    private int Current()
+    public int Current()
     {
         return Mathf.FloorToInt(-transform.position.y);
     }

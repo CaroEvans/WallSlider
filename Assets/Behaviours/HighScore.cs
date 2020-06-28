@@ -11,10 +11,13 @@ public class HighScore : MonoBehaviour
     [SerializeField]
     private bool _clearOnAwake;
 
+    public int OldScore { get; private set; }
+
     public void Awake()
     {
         if (_clearOnAwake)
             PlayerPrefs.DeleteAll();
+        OldScore = BestDistance();
         _label.Render(BestDistance());
     }
 
@@ -26,7 +29,7 @@ public class HighScore : MonoBehaviour
         }
     }
 
-    private int BestDistance ()
+    public int BestDistance ()
     {
         return PlayerPrefs.GetInt(_key, 0);
     }

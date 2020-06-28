@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
-using Views;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
@@ -31,8 +29,6 @@ public class DeadState : State
     [SerializeField]
     private Animator _animator;
     [SerializeField]
-    private TransitionScreen _screen;
-    [SerializeField]
     private UnityEvent _onDied;
 
     protected override void Enter()
@@ -42,7 +38,6 @@ public class DeadState : State
         gameObject.layer = 8;
         _distance.CheckBest(_highScore);
         StartCoroutine(StopAfterFalling(transform.position.y));
-        StartCoroutine(WaitForRestart());
         _distance.enabled = false;
         _cameraFocus.Detach();
         Vector2 randomForce = Random.insideUnitCircle;
@@ -59,12 +54,5 @@ public class DeadState : State
     {
         yield return new WaitUntil(() => transform.position.y < y - _fallDistance);
         _rigidBody.useGravity = false;
-    }
-
-    private IEnumerator WaitForRestart ()
-    {
-        yield return new WaitForSeconds(0.3f);
-        yield return new WaitUntil(() => Input.anyKeyDown);
-        _screen.Reverse(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 }

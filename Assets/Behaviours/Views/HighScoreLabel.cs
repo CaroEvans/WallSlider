@@ -20,6 +20,8 @@ namespace Views
         private CanvasGroup _group;
         [SerializeField]
         private UnityEvent _onReached;
+        [SerializeField]
+        private LayerMask _mask;
 
         public void Render(int distance)
         {
@@ -30,8 +32,11 @@ namespace Views
 
         public void OnTriggerEnter(Collider other)
         {
-            StartCoroutine(ReachedAnimation());
-            _onReached.Invoke();
+            if (_mask == (_mask | (1 << other.gameObject.layer)))
+            {
+                StartCoroutine(ReachedAnimation());
+                _onReached.Invoke();
+            }
         }
 
         private IEnumerator Fade(float start, float end)
