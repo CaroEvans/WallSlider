@@ -9,9 +9,9 @@ public class GameOverView : MonoBehaviour
     [SerializeField]
     private Distance _distance;
     [SerializeField]
-    private Animator _animator, _scoreAnimator, _textAnimator;
+    private Animator _animator, _scoreAnimator, _textAnimator, _highScoreAnimator;
     [SerializeField]
-    private ScoreLabel _label;
+    private ScoreLabel _label, _highScoreLabel;
     [SerializeField]
     private TransitionScreen _screen;
     [SerializeField]
@@ -35,16 +35,17 @@ public class GameOverView : MonoBehaviour
     {
         yield return new WaitForSeconds(0.6f);
         _animator.SetBool("Visible", true);
-        StartCoroutine(FillScore(_distance.Current()));
+        StartCoroutine(FillScore(_distance.Current(), _highScore.OldScore));
     }
 
-    private IEnumerator FillScore(int score)
+    private IEnumerator FillScore(int score, int highScore)
     {
+        _highScoreLabel.Render(highScore);
+        _highScoreAnimator.SetBool("Visible", highScore > 0);
         yield return new WaitForSeconds(2f);
         _scoreAnimator.SetBool("Filling", true);
         float current = 0;
         float stepSize = score / 2f;
-        int highScore = _highScore.OldScore;
         bool triggeredHighScore = false;
         while(current < score)
         {
@@ -54,6 +55,7 @@ public class GameOverView : MonoBehaviour
             {
                 triggeredHighScore = true;
                 _scoreAnimator.SetTrigger("HighScore");
+                _highScoreAnimator.SetBool("Visible", false);
                 _highScoreSource.Play();
                 SetPostGameText("WONDERFUL");
             }
