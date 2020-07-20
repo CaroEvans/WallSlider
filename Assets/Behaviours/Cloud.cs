@@ -4,11 +4,11 @@ using UnityEngine;
 public class Cloud : MonoBehaviour
 {
     [SerializeField]
-    private RectTransform _rectTransform;
-    [SerializeField]
     private Vector2 _spawnMinCorner, _spawnMaxCorner;
     [SerializeField]
-    private float _xMax = 15f, _speedMin = 1f, _speedMax = 10f;
+    private SpriteRenderer _renderer;
+    [SerializeField]
+    private float _xMax = 15f, _speedMin = 1f, _speedMax = 10f, _scaleMax = 5f, _scaleMin = 3f, _alphaMax = 0.9f, _alphaMin = 0.2f;
 
     public void Start()
     {
@@ -17,21 +17,23 @@ public class Cloud : MonoBehaviour
 
     private void BeginDrifting ()
     {
-        StartCoroutine(DriftLeftToRight(Random.Range(_speedMin, _speedMax)));
+        float distance = Random.Range(0, 1f);
+        transform.localScale = Vector3.one * Mathf.Lerp(_scaleMin, _scaleMax, distance);
+        _renderer.color = Color.Lerp(new Color(1, 1, 1, _alphaMin), new Color(1, 1, 1, _alphaMax), distance);
+        StartCoroutine(DriftLeftToRight(Mathf.Lerp(_speedMin, _speedMax, distance)));
     }
 
     private IEnumerator DriftLeftToRight (float speed)
     {
-        while(_rectTransform.anchoredPosition.x < _xMax)
+        while(transform.position.x < _xMax)
         {
-            _rectTransform.anchoredPosition += Vector2.right * speed * Time.deltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;
             yield return null;
         }
 
         var x = Random.Range(_spawnMinCorner.x, _spawnMaxCorner.x);
         var y = Random.Range(_spawnMinCorner.y, _spawnMaxCorner.y);
-        _rectTransform.anchoredPosition = new Vector2(x, y);
-
+        transform.position = new Vector3(x, y, transform.position.z);
         BeginDrifting();
     }
 }
