@@ -29,7 +29,7 @@ public class SlidingState : State
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             ChangeState("Jump");
     }
 }
