@@ -14,7 +14,7 @@ public class GameStart : MonoBehaviour
     [SerializeField]
     private AnimationCurve _scrollCurve;
     [SerializeField]
-    private Animator _titleAnimator;
+    private Animator _titleAnimator, _frogAnimator;
 
     void Update()
     {
@@ -24,6 +24,7 @@ public class GameStart : MonoBehaviour
 
     private void StartScrolling ()
     {
+        _frogAnimator.SetTrigger("Enter");
         _titleAnimator.SetBool("Visible", false);
         StartCoroutine(LoadGameAfterDelay());
         StartCoroutine(ScrollCamera(Time.time + _scrollAccelDuration));
