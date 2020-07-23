@@ -1,4 +1,5 @@
 # WallSlider
-Slide down walls and live your life!
+
+![](gameplay.gif)
 
 https://catsuko.github.io/WallSlider/
