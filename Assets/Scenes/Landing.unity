@@ -249,12 +249,15 @@ MonoBehaviour:
   _spawnMaxCorner: {x: -4, y: 6.5}
   _renderer: {fileID: 125066416}
   _xMax: 15
-  _speedMin: 0.8
-  _speedMax: 0.05
-  _scaleMax: 10
-  _scaleMin: 3
-  _alphaMax: 0.9
-  _alphaMin: 0.2
+  _speed:
+    _start: 0.8
+    _end: 0.05
+  _scale:
+    _start: {x: 3, y: 3, z: 3}
+    _end: {x: 10, y: 10, z: 10}
+  _color:
+    _start: {r: 1, g: 1, b: 1, a: 0.12941177}
+    _end: {r: 1, g: 1, b: 1, a: 0.85882354}
 --- !u!212 &125066416
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1345,12 +1348,15 @@ MonoBehaviour:
   _spawnMaxCorner: {x: -4, y: 6.5}
   _renderer: {fileID: 1052727030}
   _xMax: 15
-  _speedMin: 0.8
-  _speedMax: 0.05
-  _scaleMax: 10
-  _scaleMin: 3
-  _alphaMax: 0.9
-  _alphaMin: 0.2
+  _speed:
+    _start: 0.8
+    _end: 0.05
+  _scale:
+    _start: {x: 3, y: 3, z: 3}
+    _end: {x: 10, y: 10, z: 10}
+  _color:
+    _start: {r: 1, g: 1, b: 1, a: 0.12941177}
+    _end: {r: 1, g: 1, b: 1, a: 0.85882354}
 --- !u!212 &1052727030
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1515,12 +1521,15 @@ MonoBehaviour:
   _spawnMaxCorner: {x: -4, y: 6.5}
   _renderer: {fileID: 1138950095}
   _xMax: 15
-  _speedMin: 0.8
-  _speedMax: 0.05
-  _scaleMax: 10
-  _scaleMin: 3
-  _alphaMax: 0.9
-  _alphaMin: 0.2
+  _speed:
+    _start: 0.8
+    _end: 0.05
+  _scale:
+    _start: {x: 3, y: 3, z: 3}
+    _end: {x: 10, y: 10, z: 10}
+  _color:
+    _start: {r: 1, g: 1, b: 1, a: 0.12941177}
+    _end: {r: 1, g: 1, b: 1, a: 0.85882354}
 --- !u!1 &1563405353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,12 +1750,15 @@ MonoBehaviour:
   _spawnMaxCorner: {x: -4, y: 6.5}
   _renderer: {fileID: 2083847012}
   _xMax: 15
-  _speedMin: 0.8
-  _speedMax: 0.05
-  _scaleMax: 10
-  _scaleMin: 3
-  _alphaMax: 0.9
-  _alphaMin: 0.2
+  _speed:
+    _start: 0.8
+    _end: 0.05
+  _scale:
+    _start: {x: 3, y: 3, z: 3}
+    _end: {x: 10, y: 10, z: 10}
+  _color:
+    _start: {r: 1, g: 1, b: 1, a: 0.12941177}
+    _end: {r: 1, g: 1, b: 1, a: 0.85882354}
 --- !u!212 &2083847012
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -16,6 +16,10 @@ public class GameStart : MonoBehaviour
     [SerializeField]
     private Animator _titleAnimator, _frogAnimator;
 
+    public void Start()
+    {
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

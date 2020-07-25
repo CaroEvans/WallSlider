@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Gangplank.Ranges;
 
 public class Cloud : MonoBehaviour
 {
@@ -8,7 +9,13 @@ public class Cloud : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _renderer;
     [SerializeField]
-    private float _xMax = 15f, _speedMin = 1f, _speedMax = 10f, _scaleMax = 5f, _scaleMin = 3f, _alphaMax = 0.9f, _alphaMin = 0.2f;
+    private float _xMax = 15f;
+    [SerializeField]
+    private FloatRange _speed;
+    [SerializeField]
+    private Vector3Range _scale;
+    [SerializeField]
+    private ColorRange _color;
 
     public void Start()
     {
@@ -18,9 +25,9 @@ public class Cloud : MonoBehaviour
     private void BeginDrifting ()
     {
         float distance = Random.Range(0, 1f);
-        transform.localScale = Vector3.one * Mathf.Lerp(_scaleMin, _scaleMax, distance);
-        _renderer.color = Color.Lerp(new Color(1, 1, 1, _alphaMin), new Color(1, 1, 1, _alphaMax), distance);
-        StartCoroutine(DriftLeftToRight(Mathf.Lerp(_speedMin, _speedMax, distance)));
+        transform.localScale = _scale.Interpolate(distance);
+        _renderer.color = _color.Interpolate(distance);
+        StartCoroutine(DriftLeftToRight(_speed.Interpolate(distance)));
     }
 
     private IEnumerator DriftLeftToRight (float speed)
