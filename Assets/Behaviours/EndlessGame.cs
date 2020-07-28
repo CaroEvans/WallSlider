@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Chutes;
-using System.Linq;
 using Obstacles;
 using System.Collections;
 using Levels;
@@ -8,12 +7,16 @@ using Values;
 using ObjectFactories;
 using System.Collections.Generic;
 
-public class Spawner : MonoBehaviour
+public class EndlessGame : MonoBehaviour
 {
     [SerializeField]
     private PrefabFactory _factory;
     [SerializeField]
     private PrefabFactory[] _fruitFactories;
+    [SerializeField]
+    private PrefabFactory _backgroundFactory;
+    [SerializeField]
+    private Vector3 _backgroundOffset;
     [SerializeField]
     private Transform _player;
     [SerializeField, Range(1, 15)]
@@ -64,8 +67,9 @@ public class Spawner : MonoBehaviour
 
     private Chute Chute()
     {
-        var evenChute = new EvenChute(_chunkHeight);
-        return new DebugChute(evenChute);
+        Chute chute = new EvenChute(_chunkHeight);
+        chute = new ChuteBackgroundDecorator(chute, new PositionOffsetFactoryDecorator(_backgroundFactory, _backgroundOffset));
+        return new DebugChute(chute);
     }
 
     private Obstacle Obstacle()

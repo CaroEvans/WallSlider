@@ -12023,6 +12023,7 @@ GameObject:
   - component: {fileID: 1659032974}
   - component: {fileID: 1659032973}
   - component: {fileID: 1659032976}
+  - component: {fileID: 1659032977}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -12060,6 +12061,8 @@ MonoBehaviour:
   - {fileID: 1659032975}
   - {fileID: 1659032974}
   - {fileID: 1659032973}
+  _backgroundFactory: {fileID: 1659032977}
+  _backgroundOffset: {x: 0, y: 0, z: 10}
   _player: {fileID: 1701074293}
   _chuteWidth: 6
   _xOffset: 1
@@ -12191,6 +12194,19 @@ MonoBehaviour:
   _key: BestDistance
   _label: {fileID: 2020829623}
   _clearOnAwake: 0
+--- !u!114 &1659032977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659032969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066b87481ce56d45960b2d980c86786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8120727713745535547, guid: e214d5ef91be1ac419b49fbd32e2314a, type: 3}
 --- !u!1 &1701074289
 GameObject:
   m_ObjectHideFlags: 0
@@ -12381,7 +12397,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _landingParticles: {fileID: 462167348}
-  _spawner: {fileID: 1659032971}
+  _game: {fileID: 1659032971}
   _renderer: {fileID: 1701074291}
   _animator: {fileID: 1701074292}
   _onJumped:

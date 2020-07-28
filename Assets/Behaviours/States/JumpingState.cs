@@ -16,7 +16,7 @@ public class JumpingState : State
     [SerializeField]
     private ParticleSystem _landingParticles;
     [SerializeField]
-    private Spawner _spawner;
+    private EndlessGame _game;
     [SerializeField]
     private SpriteRenderer _renderer;
     [SerializeField]
@@ -38,7 +38,7 @@ public class JumpingState : State
 
     protected override void Exit()
     {
-        StartCoroutine(_spawner.BounceItems(transform.position));
+        StartCoroutine(_game.BounceItems(transform.position));
         _renderer.flipX = !_renderer.flipX;
         _animator.SetTrigger("Land");
     }
