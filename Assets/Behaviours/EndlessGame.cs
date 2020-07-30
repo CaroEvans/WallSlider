@@ -14,7 +14,7 @@ public class EndlessGame : MonoBehaviour
     [SerializeField]
     private PrefabFactory[] _fruitFactories;
     [SerializeField]
-    private PrefabFactory _backgroundFactory;
+    private PooledPrefabFactory _backgroundFactory;
     [SerializeField]
     private Vector3 _backgroundOffset;
     [SerializeField]
