@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292293190}
   - component: {fileID: 292293191}
+  - component: {fileID: 8800442748540995997}
   m_Layer: 0
   m_Name: Foreground
   m_TagString: Untagged
@@ -81,6 +82,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8800442748540995997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292293189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7d5bed23a115641a8b359c4e1d7e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 292293191}
+  _sprites:
+  - {fileID: 21300000, guid: d5af81547df94904faed35c69538307b, type: 3}
+  - {fileID: 21300000, guid: d5af81547df94904faed35c69538307b, type: 3}
+  - {fileID: 21300000, guid: d5af81547df94904faed35c69538307b, type: 3}
+  - {fileID: 21300000, guid: d5af81547df94904faed35c69538307b, type: 3}
+  - {fileID: 21300000, guid: 45f7e02ed34182f45af8b5b13c684271, type: 3}
+  - {fileID: 21300000, guid: 4e2ff8611f2f0794abbb1b936f91e6c4, type: 3}
 --- !u!1 &8120727713745535547
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +202,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6460912323813637607}
+        m_MethodName: Roll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8800442748540995997}
         m_MethodName: Roll
         m_Mode: 1
         m_Arguments:
