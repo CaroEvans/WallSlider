@@ -12546,7 +12546,7 @@ MonoBehaviour:
   _fruitPrefsKey: FruitCount
   _max: 50
   _life: {fileID: 1701074300}
-  _drainRate: 2
+  _drainRate: 0.5
   _onShieldBroken:
     m_PersistentCalls:
       m_Calls:
